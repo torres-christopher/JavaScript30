@@ -27,6 +27,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -44,20 +45,34 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
     }
 
-    .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
-    .panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
+    .panel1 { background-image:url(https://hesterandcook.com/cdn/shop/files/WP102__2.jpg?v=1692387187&width=1500); }
+    .panel2 { background-image:url(https://images.wallpaperscraft.com/image/single/hand_art_sculpture_120875_1500x1500.jpg); }
     .panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
-    .panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
-    .panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+    .panel4 { background-image:url(https://upload.wikimedia.org/wikipedia/commons/f/f1/1500x1500-abstract-dfg4001.jpg); }
+    .panel5 { background-image:url(https://image.winudf.com/v2/image/Y29tLnNnbS5zcGFjZXdhbGxwYXBlcmhkX3NjcmVlbnNob3RzXzRfZjY4YmMwNTM/screen-4.jpg?fakeurl=1&type=.jpg); }
 
     /* Flex Children */
     .panel > * {
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      justify-content: center;
+      align-items: center;
+      display: flex;
     }
+
+    .panel > *:first-child {transform: translateY(-100%);}
+    .panel.openActive > *:first-child {transform: translateY(0);}
+    .panel > *:last-child {transform: translateY(100%);}
+    .panel.openActive > *:last-child {transform: translateY(0);}
 
     .panel p {
       text-transform: uppercase;
@@ -72,6 +87,7 @@
 
     .panel.open {
       font-size: 40px;
+      flex: 5;
     }
 
   </style>
@@ -106,6 +122,22 @@
   </div>
 
   <script>
+    /* Get all panels */
+    const panels  = document.querySelectorAll(".panel");
+
+    /* Define functions */
+    const toggleOpen = function() {
+      this.classList.toggle("open");
+    };
+    const toggleActive = function(e) {
+      if(e.propertyName.includes("flex")){
+        this.classList.toggle("openActive");
+      }      
+    };
+
+    /* Run functions */
+    panels.forEach(panel => panel.addEventListener("click", toggleOpen));
+    panels.forEach(panel => panel.addEventListener("transitionend", toggleActive));
 
   </script>
 

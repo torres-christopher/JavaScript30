@@ -7,6 +7,18 @@
     <link rel="icon" href="https://fav.farm/🔥" />
   </head>
   <body>
-    <script></script>
+    <script>
+      const KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "b", "a", "Enter"];
+      const lineUp = []
+      window.addEventListener("keyup", (e) => {
+        lineUp.push(e.key)
+        lineUp.splice(-KONAMI.length - 1, lineUp.length - KONAMI.length);
+        console.log(lineUp);
+        if(KONAMI.join("").includes(lineUp.join("")) && KONAMI.length == lineUp.length) {
+          cornify_add();
+        }
+      })
+      
+    </script>
   </body>
 </html>
